@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Button, Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function Login() {
+export default function Register() {
     const navigation = useNavigation();
-
     return (
         <View style={styles.container}>
             <View style={styles.contentLogo}>
@@ -12,6 +11,12 @@ export default function Login() {
             </View>
             <View style={styles.contentFillInformations}>
                 <View style={styles.contentInputs}>
+                    <View style={styles.input}>
+                        <TextInput 
+                            placeholder="Nome" 
+                            style={styles.textInput} 
+                        />
+                    </View>
                     <View style={styles.input}>
                         <TextInput 
                             placeholder="Email" 
@@ -25,20 +30,15 @@ export default function Login() {
                             secureTextEntry 
                         />
                     </View>
-                    <TouchableOpacity>
-                        <Text style={styles.textForgotPassword}>
-                            Esqueci a senha
-                        </Text>
-                    </TouchableOpacity>
                 </View>
                 <View style={styles.contentButtonNext}>
                     <TouchableOpacity style={styles.buttonNext} onPress={() => console.log("Avançar pressionado")}>
                         <Text>Avançar</Text>
                     </TouchableOpacity>
-                    <View style={styles.contentCreateNewAccount}>
-                        <Text>Não tem conta?</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                            <Text style={styles.textCreateNewAccount}> Criar uma conta</Text>
+                    <View style={styles.contentLogin}>
+                        <Text>Já tem uma conta?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                            <Text style={styles.textLogin}> Login</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -53,16 +53,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     logoFaeterj: {
-        width: 225,
-        resizeMode: "contain"
+        width: 150,
+        height: 150,
+        resizeMode: "contain",
     },
     contentLogo: {
-        height: Dimensions.get("window").height / 2,
+        height: (2 / 5) * Dimensions.get("window").height,
         justifyContent: 'flex-end',
         alignItems: 'center',
+        marginBottom: 10,
     },
     contentFillInformations: {
-        height: Dimensions.get("window").height / 2,
+        height: (3 / 5) * Dimensions.get("window").height,
         justifyContent: 'space-between',
         alignItems: "center"
     },
@@ -73,19 +75,12 @@ const styles = StyleSheet.create({
         width: Dimensions.get("window").width - 100,
         paddingBottom: 70
     },
-    contentCreateNewAccount: {
+    contentLogin: {
         flexDirection: "row",
         justifyContent: "center"
     },
     input: {
         marginTop: 25
-    },
-    textCreateNewAccount: {
-        color: "#3B45F5"
-    },
-    textForgotPassword: {
-        textAlign: "right",
-        marginTop: 10
     },
     textInput: {
         height: 50,
@@ -95,6 +90,9 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 16,
         backgroundColor: '#fff',  
+    },
+    textLogin: {
+        color: "#3B45F5"
     },
     buttonNext: {
         height: 50,
@@ -106,4 +104,5 @@ const styles = StyleSheet.create({
         alignItems: "center",
     }
 });
-  
+
+
