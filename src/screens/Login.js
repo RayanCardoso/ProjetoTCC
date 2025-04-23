@@ -32,7 +32,7 @@ export default function Login() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.contentButtonNext}>
-                    <TouchableOpacity style={styles.buttonNext} onPress={() => console.log("Avançar pressionado")}>
+                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate("Subject")}>
                         <Text>Avançar</Text>
                     </TouchableOpacity>
                     <View style={styles.contentCreateNewAccount}>
