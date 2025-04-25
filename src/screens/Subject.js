@@ -8,17 +8,45 @@ export default function Subject() {
     return (
         <View style={styles.container}>
             <View>
-                <TouchableOpacity style={styles.subjectButton}>
+                <TouchableOpacity 
+                    style={styles.subjectButton}
+                    onPress={() => {
+                        navigation.navigate("Checklist", {
+                            subject: "5PDM"
+                        })
+                    }}
+                >
                     <Text style={styles.subjectButtonText}>5PDM</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.subjectButton}>
+                <TouchableOpacity 
+                    style={styles.subjectButton}
+                    onPress={() => {
+                        navigation.navigate("Checklist", {
+                            subject: "4POA"
+                        })
+                    }}
+                >
                     <Text style={styles.subjectButtonText}>4POA</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.subjectButton}>
+                <TouchableOpacity 
+                    style={styles.subjectButton}
+                    onPress={() => {
+                        navigation.navigate("Checklist", {
+                            subject: "4UBD"
+                        })
+                    }}
+                >
                     <Text style={styles.subjectButtonText}>4UBD</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.subjectButton}>
-                    <Text style={styles.subjectButtonText}>4SBD</Text>
+                <TouchableOpacity 
+                    style={styles.subjectButton}
+                    onPress={() => {
+                        navigation.navigate("Checklist", {
+                            subject: "5SBD"
+                        })
+                    }}
+                >
+                    <Text style={styles.subjectButtonText}>5SBD</Text>
                 </TouchableOpacity>
             </View>
             <View>
