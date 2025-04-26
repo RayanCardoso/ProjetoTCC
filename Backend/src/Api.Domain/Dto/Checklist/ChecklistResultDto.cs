@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Api.Domain.Dto.Subject
 {
-    public class SubjectResultDto
+    public class ChecklistResultDto
     {
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public Guid UserId { get; set; }
-
         public Guid Id { get; set; }
+        public string ItemDescription { get; set; }
+        public bool Checked { get; set; }
+        public Guid SubjectId { get; set; }
     }
 }

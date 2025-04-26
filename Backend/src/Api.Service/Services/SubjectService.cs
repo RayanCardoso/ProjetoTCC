@@ -20,10 +20,10 @@ namespace Api.Service.Services
     public class SubjectService : ISubjectService
     {
 
-        private IRepository<SubjectEntity> _repository;
+        private ISubjectRepository _repository;
         private readonly IMapper _mapper;
 
-        public SubjectService(IRepository<SubjectEntity> repository, IMapper mapper)
+        public SubjectService(ISubjectRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -42,7 +42,7 @@ namespace Api.Service.Services
 
         public async Task<IEnumerable<SubjectResultDto>> GetAll(Guid userId)
         {
-            var listEntity = await _repository.SelectAsync();
+            var listEntity = await _repository.GetAllByUser(userId);
 
             var dto = _mapper.Map<IEnumerable<SubjectResultDto>>(listEntity);
 

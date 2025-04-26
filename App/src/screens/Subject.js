@@ -38,6 +38,7 @@ export default function Subject() {
         setModalVisible(false)
         setModalName("")
         setModalDescription("")
+        fetchSubjects();
     } 
 
     return (
@@ -69,7 +70,7 @@ export default function Subject() {
                             style={styles.subjectButton}
                             onPress={() => {
                                 navigation.navigate("Checklist", {
-                                    subject: subject.name
+                                    subjectId: subject.id
                                 })
                             }}
                         >

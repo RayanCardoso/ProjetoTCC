@@ -15,25 +15,25 @@ namespace Api.Application.Controllers
 {   
     [Route ("api/[controller]")]
     [ApiController]
-    public class SubjectController : ControllerBase
+    public class ChecklistController : ControllerBase
     {
-        private ISubjectService _service;
+        private IChecklistService _service;
 
-        public SubjectController (ISubjectService service){
+        public ChecklistController (IChecklistService service){
             _service = service;
         }
 
         [Authorize("Bearer")]
         [HttpGet]
-        [Route ("User/{userId}")]
-        public async Task<ActionResult> GetAll(Guid userId){
+        [Route ("Subject/{subjectId}")]
+        public async Task<ActionResult> GetAll(Guid subjectId){
             
             if(!ModelState.IsValid){
                 return BadRequest(ModelState); //400 bad request - Solicitação Inválida
             }
 
             try{
-                return Ok(await _service.GetAll(userId));
+                return Ok(await _service.GetAll(subjectId));
             }
             catch(ArgumentException e)
             {
@@ -43,7 +43,7 @@ namespace Api.Application.Controllers
         
         [Authorize("Bearer")]
         [HttpGet]
-        [Route ("{id}", Name = "GetSubjectWithId")]
+        [Route ("{id}", Name = "GetChecklistWithId")]
 
         public async Task<ActionResult> Get(Guid id){
 
@@ -62,14 +62,14 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] SubjectPostDto subject){
+        public async Task<IActionResult> Post([FromBody] ChecklistPostDto checklist){
 
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
 
             try{
-                var result = await _service.Post(subject);
+                var result = await _service.Post(checklist);
 
                 if(result != null){
                     return Ok(result);
@@ -87,7 +87,7 @@ namespace Api.Application.Controllers
         [Authorize("Bearer")]
         [HttpPut]
 
-        public async Task<IActionResult> Put([FromBody] SubjectPutDto subject){
+        public async Task<IActionResult> Put([FromBody] ChecklistPutDto checklist){
 
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
@@ -95,7 +95,7 @@ namespace Api.Application.Controllers
 
             try{
 
-                var result = await _service.Put(subject);
+                var result = await _service.Put(checklist);
 
                 if(result != null){
                     return Ok(result);

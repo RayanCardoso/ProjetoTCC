@@ -32,6 +32,15 @@ namespace Api.CrossCutting.Mappings
 
             CreateMap<SubjectPutDto,SubjectEntity>()
                 .ReverseMap();
+
+            CreateMap<ChecklistResultDto,ChecklistEntity>()
+                .ReverseMap();
+
+            CreateMap<ChecklistPostDto, ChecklistEntity>()
+                .ReverseMap();
+
+            CreateMap<ChecklistPutDto,ChecklistEntity>()
+                .ReverseMap();
         }
     }
 }

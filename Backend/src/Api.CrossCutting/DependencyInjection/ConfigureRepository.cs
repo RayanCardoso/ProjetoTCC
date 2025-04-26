@@ -19,6 +19,7 @@ namespace Api.CrossCutting.DependencyInjection
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             serviceCollection.AddScoped<IUserRepository, UserImplementation>();
             serviceCollection.AddScoped<ISubjectRepository, SubjectImplementation>();
+            serviceCollection.AddScoped<IChecklistRepository, ChecklistImplementation>();
 
             serviceCollection.AddDbContext<MyContext>(
                 options => options.UseNpgsql("Server=localhost;Port=5433;Database=TCC;User Id=admin;Password=1234")

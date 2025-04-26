@@ -12,6 +12,7 @@ namespace Api.Data.Context
     {
         public DbSet<UserEntity> User { get; set; }
         public DbSet<SubjectEntity> Subject { get; set; }
+        public DbSet<ChecklistEntity> Checklist { get; set; }
 
         public MyContext (DbContextOptions<MyContext> options) : base (options) {}
     
