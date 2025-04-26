@@ -7,7 +7,7 @@ namespace Api.Domain.Dto.Login
 {
     public class LoginDto
     {
-        public string Usuario {get;set;}
+        public string User {get;set;}
         public string Password {get;set;}
 
     }

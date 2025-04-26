@@ -55,8 +55,8 @@ namespace Api.Service.Services
             {
 
 
-                baseUser = await _repository.FindByEmail(user.Usuario)
-                        ?? await _repository.FindByUserName(user.Usuario);
+                baseUser = await _repository.FindByEmail(user.User)
+                        ?? await _repository.FindByUserName(user.User);
 
                 if (baseUser == null)
                 {
@@ -78,11 +78,11 @@ namespace Api.Service.Services
                 else
                 {
                     ClaimsIdentity identity = new ClaimsIdentity(
-                        new GenericIdentity(user.Usuario),
+                        new GenericIdentity(user.User),
                         new[]
                         {
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.UniqueName,user.Usuario)
+                            new Claim(JwtRegisteredClaimNames.UniqueName,user.User)
                         }
                     );
 
@@ -92,7 +92,9 @@ namespace Api.Service.Services
                     var handler = new JwtSecurityTokenHandler();
                     string token = CreateToken(identity, createDate, expirationDate, handler);
 
-                    return SuccessObject(createDate, expirationDate, token, user);
+                    Guid userId = baseUser.Id;
+
+                    return SuccessObject(createDate, expirationDate, token, user, userId);
                 }
 
             }
@@ -112,7 +114,7 @@ namespace Api.Service.Services
             return BCrypt.Net.BCrypt.Verify(passwordRequest, hashedPassword);
         }
 
-        private object SuccessObject(DateTime createDate, DateTime expirationDate, string token, LoginDto user)
+        private object SuccessObject(DateTime createDate, DateTime expirationDate, string token, LoginDto user, Guid userId)
         {
             return new
             {
@@ -120,7 +122,8 @@ namespace Api.Service.Services
                 created = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 expiration = expirationDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 acessToken = token,
-                userName = user.Usuario,
+                userName = user.User,
+                userId,
                 message = "Usuário Logado com sucesso"
             };
         }

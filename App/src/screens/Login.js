@@ -1,9 +1,38 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { Button, Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Alert, Button, Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { login } from "../api/user";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
     const navigation = useNavigation();
+
+    const [user, setUser] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleLogin = async () => {
+        try {
+            const data = {
+                user: user,
+                password: password
+            }
+
+            const response = await login(data)
+
+            if(!response.data.authenticated) {
+                Alert.alert("Atenção!", response.data.message)
+                return;
+            }
+
+            await AsyncStorage.setItem("tcc:token", response.data.acessToken)
+            await AsyncStorage.setItem("tcc:userId", response.data.userId)
+            
+            navigation.navigate("Subject")
+        } catch (error) {
+            console.log(error)
+            Alert.alert("Houve um erro ao realizar o login", "Verifique as informações e tente novamente.")
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -15,12 +44,14 @@ export default function Login() {
                     <View style={styles.input}>
                         <TextInput 
                             placeholder="Email" 
+                            onChangeText={(text) => setUser(text)}
                             style={styles.textInput} 
                         />
                     </View>
                     <View style={styles.input}>
                         <TextInput 
                             placeholder="Senha" 
+                            onChangeText={(text) => setPassword(text)}
                             style={styles.textInput} 
                             secureTextEntry 
                         />
@@ -32,7 +63,7 @@ export default function Login() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.contentButtonNext}>
-                    <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate("Subject")}>
+                    <TouchableOpacity style={styles.buttonNext} onPress={handleLogin}>
                         <Text>Avançar</Text>
                     </TouchableOpacity>
                     <View style={styles.contentCreateNewAccount}>
