@@ -1,0 +1,16 @@
+/.vscode
+
+/Backend/src/Api.Application/bin
+/Backend/src/Api.Application/obj
+
+/Backend/src/Api.Crosscutting/bin
+/Backend/src/Api.Crosscutting/obj
+
+/Backend/src/Api.Data/bin
+/Backend/src/Api.Data/obj
+
+/Backend/src/Api.Domain/bin
+/Backend/src/Api.Domain/obj
+
+/Backend/src/Api.Service/bin
+/Backend/src/Api.Service/obj
